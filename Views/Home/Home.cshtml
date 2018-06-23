@@ -1,0 +1,58 @@
+﻿<style>
+table {
+    width: 80%;
+}
+table th tr{
+    border: 1px solid grey;
+    border-collapse: collapse;
+}
+</style>
+<h3>Welcome @ViewBag.user.Firstname</h3>
+
+<hr>
+<table>
+    <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>Number of Participants</th>
+        <th>Action</th>    
+    </tr>
+    @foreach(var x in @ViewBag.activities){
+        <tr>
+            <td><a href="/info/@x.ActivityId">@x.Title</a></td>
+            <td>@x.Date & @x.Time</td>
+            <td>@x.Duration @x.Durationtype</td>
+            <td>@x.User.Firstname</td>
+            <td>@x.Attenders.Count</td>
+            @{
+                if(@x.UserId == @ViewBag.user.UserId){
+                    <td><a href="/info/@x.ActivityId/delete">Delete</a></td>
+                }
+                else{
+                    int count = 0;
+                    int jointId;
+                    if(@x.Attenders.Count !=0){
+                       foreach(var y in @x.Attenders){
+                           if(@y.UserId == @ViewBag.user.UserId){
+                               count+=1;
+                           }
+                       }
+                       if(count>0){
+                            <td><a href="/leave/@x.ActivityId">Leave</a></td>
+                       } 
+                       else{
+                            <td><a href="/join/@x.ActivityId">Join</a></td>
+                       }
+                    }
+                    else{
+                        <td><a href="/join/@x.ActivityId">Join</a></td>
+                    }
+                }
+            }
+        </tr>
+    }
+</table>
+<hr>
+<a href="/add"><button>Add New Activity!</button></a>

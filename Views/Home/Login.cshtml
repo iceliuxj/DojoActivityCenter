@@ -1,0 +1,14 @@
+@using DojoActivityCenter.Models
+@model LoginValidator
+<div id="wrapper" style="text-align: left">
+    <h2>LOGIN</h2>
+    <form method="POST" asp-controller="Home" asp-action="Login">
+        <span asp-validation-for="LoginId"style="color:red;"></span><br>
+        <label asp-for ="LoginId">Id: <input type="email" asp-for="LoginId"></label><br>
+        <span asp-validation-for="LoginPw"style="color:red;"></span><br>
+        <label asp-for ="LoginPw">Password: <input type="password" asp-for="LoginPw"></label>
+        <p style="color:red;">@ViewBag.Error</p>
+        <br>
+        <input type="submit" value="LOGIN" style="background-color: white;">
+    </form>
+</div>

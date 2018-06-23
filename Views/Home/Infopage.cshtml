@@ -1,0 +1,13 @@
+<h1>@ViewBag.activities.Title</h1>
+<a href="/join/@ViewBag.activities.ActivityId"><button>Join</button></a>
+<h2>Event Coordinator : @ViewBag.activities.User.Firstname</h2>
+<hr>
+<h3>Description:</h3>
+<p>@ViewBag.activities.Description</p>
+<hr>
+<h4>Participants: </h4>
+<ul>
+    @foreach(var x in @ViewBag.activities.Attenders){
+        <li>@x.User.Firstname</li>
+    }
+</ul>
